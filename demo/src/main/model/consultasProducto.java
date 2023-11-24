@@ -19,14 +19,23 @@ public class consultasProducto {
     }
     
     public boolean eliminar(int id) {
-    try (Connection con = conexion.getConexion();
-            PreparedStatement ps = con.prepareStatement("DELETE FROM Productos WHERE ID = ?")) {
-        ps.setInt(1, id);
-        return ps.executeUpdate() > 0;
-    } catch (Exception e) {
-        System.out.println(e);
-        return false;
+        try (Connection con = conexion.getConexion();
+             PreparedStatement ps = con.prepareStatement("DELETE FROM Productos WHERE ID = ?")) {
+            ps.setInt(1, id);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
     }
+
+    public boolean registrar (producto producto){
+    
+        try (Connection con = conexion.getConexion();
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Productos (nombre, desc, precio) VALUES (?,?,?)")) {
+            ps.setString(1, producto.getNombre());
+            ps.setString(2, producto.getDesc());
+}
 
     
 }
