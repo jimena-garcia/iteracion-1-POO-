@@ -1,10 +1,13 @@
-package demo.src.main.java.com.example;
+package com.example;
+
+import demo.src.main.modelproducto;
+import demo.src.main.model.consultasProducto;
 
 public class BD_H2 {
     public static void main(String[] args) {
-        Medicamento medicamento = new Producto();
-        ConsultasProducto consultasProducto = new ConsultasProducto();
-        ProductView view = new ProductView();
-        ControladorProducto controladorProducto = new ControladorProducto(medicamento, consultasProducto, view);
+
+        producto producto = new producto();
+        consultasProducto consultasProducto = new consultasProducto();
+        
     }
 }

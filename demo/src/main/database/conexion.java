@@ -7,7 +7,7 @@ import java.util.Properties;
 
 import javax.swing.JOptionPane;
 
-public class conection {
+public class conexion {
     private Connection con = null;
 
     public Connection getConexion() {
