@@ -13,13 +13,6 @@ public class BD_H2 {
       view view = new view();
       consultasProducto consultasProducto = new consultasProducto();
       mainController mainController = new mainController(producto, view, consultasProducto);
-
-    
-      mainController.modificar();
-      mainController.eliminar();
-      mainController.buscar();
-      mainController.registrar(producto);
-
       view.setVisible(true);
 
     }
