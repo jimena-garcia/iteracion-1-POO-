@@ -1,0 +1,10 @@
+view\view$3.class
+database\conexion.class
+controller\mainController.class
+com\example\BD_H2.class
+view\view$1.class
+view\view.class
+model\list.class
+view\view$2.class
+model\producto.class
+model\consultasProducto.class

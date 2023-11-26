@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-public class mainController implements ActionListener {
+public class mainController implements ActionListener{
 
     private final producto producto;
     private final consultasProducto consultasProducto;
@@ -28,81 +28,62 @@ public class mainController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == view.jButtonEliminar) {
             eliminar();
-        }
-        if (e.getSource() == view.jButtonModificar) {
+        } else if (e.getSource() == view.jButtonModificar) {
             modificar();
-        }
-        if (e.getSource() == view.jButtonRegistrar) {
+        } else if (e.getSource() == view.jButtonRegistrar) {
             registrar(producto);
-        }
-        if (e.getSource() == view.jButtonBuscar) {
+        } else if (e.getSource() == view.jButtonBuscar) {
             buscar();
         }
     }
 
     public void eliminar() {
-        try {
-            int id = Integer.parseInt(view.jTextID.getText());
-            if (consultasProducto.eliminar(id)) {
-                JOptionPane.showMessageDialog(null, "Producto eliminado correctamente");
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al eliminar producto");
-            }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "ID no válido");
+        int id = Integer.parseInt(view.jTextID.getText());
+        if (consultasProducto.eliminar(id)) {
+            JOptionPane.showMessageDialog(null, "Producto eliminado correctamente");
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al eliminar producto");
         }
     }
 
     public void registrar(producto producto) {
-        try {
-            obtenerProductoVista();
-            if (consultasProducto.registrar(producto)) {
-                JOptionPane.showMessageDialog(null, "Producto registrado correctamente");
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al registrar producto");
-            }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Precio no válido");
+        obtenerProductoVista();
+        if (consultasProducto.registrar(producto)) {
+            JOptionPane.showMessageDialog(null, "Producto registrado correctamente");
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al registrar producto");
         }
     }
 
     public void modificar() {
-        try {
-            obtenerProductoVista();
-            if (consultasProducto.modificar(producto)) {
-                JOptionPane.showMessageDialog(null, "Producto modificado correctamente");
-                limpiarVista();
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al modificar producto");
-            }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Precio no válido");
+        obtenerProductoVista();
+        if (consultasProducto.modificar(producto)) {
+            JOptionPane.showMessageDialog(null, "Producto modificado correctamente");
+            limpiarVista();
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al modificar producto");
         }
     }
 
     public void buscar() {
-        try {
-            producto.setId(Integer.parseInt(view.jTextID.getText()));
-            if (consultasProducto.buscar(producto)) {
-                ocuparProductoVista();
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al buscar producto");
-            }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "ID no válido");
+        producto.setId(Integer.parseInt(view.jTextID.getText()));
+        if (consultasProducto.buscar(producto)) {
+            ocuparProductoVista(); 
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al buscar producto");
         }
     }
 
     private void obtenerProductoVista() {
         producto.setNombre(view.jTextNombre.getText());
-        producto.setDesc(view.jTextDesc.getText());
+       producto.setDesc(view.jTextDescripcion.getText()); 
         producto.setPrecio(Double.parseDouble(view.jTextPrecio.getText()));
     }
 
     private void ocuparProductoVista() {
         view.jTextNombre.setText(String.valueOf(producto.getId()));
         view.jTextNombre.setText(producto.getNombre());
-        view.jTextDesc.setText(producto.getDesc());
+        view.jTextDescripcion.setText(producto.getDesc());
         view.jTextPrecio.setText(String.valueOf(producto.getPrecio()));
 
     }
@@ -110,7 +91,10 @@ public class mainController implements ActionListener {
     private void limpiarVista() {
         view.jTextID.setText("");
         view.jTextNombre.setText("");
-        view.jTextDesc.setText("");
+        view.jTextDescripcion.setText("");
         view.jTextPrecio.setText("");
     }
+     
+
+
 }

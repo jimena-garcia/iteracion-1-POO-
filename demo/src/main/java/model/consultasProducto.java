@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 
 import database.conexion;
 import java.sql.SQLException;
-import java.util.List;
+
 
 
 
