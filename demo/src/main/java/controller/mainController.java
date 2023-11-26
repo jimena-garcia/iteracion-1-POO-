@@ -6,7 +6,7 @@ import view.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -24,6 +24,8 @@ public class mainController implements ActionListener {
         this.view.jButtonModificar.addActionListener(this);
         this.view.jButtonRegistrar.addActionListener(this);
         this.view.jButtonBuscar.addActionListener(this);
+        this.view.jButtonActualizar.addActionListener(this); 
+        view.setVisible(true);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -38,6 +40,9 @@ public class mainController implements ActionListener {
         }
         if (e.getSource() == view.jButtonBuscar) {
             buscar();
+        }
+        if (e.getSource() == view.jButtonActualizar) {
+            actualizarTabla(); 
         }
     }
 
@@ -113,5 +118,9 @@ public class mainController implements ActionListener {
         view.jTextNombre.setText("");
         view.jTextDescripcion.setText("");
         view.jTextPrecio.setText("");
+    }
+     private void actualizarTabla() {
+        List<producto> listaProductos = consultasProducto.obtenerTodosLosProductos();
+        view.actualizarTabla(listaProductos);
     }
 }
