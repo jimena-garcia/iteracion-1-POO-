@@ -1,14 +1,16 @@
-package demo.src.main.model;
+package model;
 
 public class producto {
     private int id;
     public String nombre;
     public String desc;
-    public int precio;
+    public double precio;
+
+   
 
     public int getId() {
         return id;
-    }
+    } 
 
     public void setId(int id) {
         this.id = id;
@@ -30,12 +32,13 @@ public class producto {
         this.desc = desc;
     }
 
-    public String getPrecio(){
+    public double getPrecio(){
         return precio;
     }
 
-    public void setPrecio(String precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
+
     
 }

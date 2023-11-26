@@ -1,13 +1,26 @@
 package com.example;
 
-import demo.src.main.modelproducto;
-import demo.src.main.model.consultasProducto;
+import controller.mainController;
+import model.consultasProducto;
+import model.producto;
+import view.view; 
+
 
 public class BD_H2 {
     public static void main(String[] args) {
+      
+      producto producto = new producto();
+      view view = new view();
+      consultasProducto consultasProducto = new consultasProducto();
+      mainController mainController = new mainController(producto, view, consultasProducto);
 
-        producto producto = new producto();
-        consultasProducto consultasProducto = new consultasProducto();
-        
+    
+      mainController.modificar();
+      mainController.eliminar();
+      mainController.buscar();
+      mainController.registrar(producto);
+
+      view.setVisible(true);
+
     }
 }

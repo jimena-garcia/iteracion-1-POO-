@@ -1,11 +1,9 @@
-package demo.src.main.database;
+package database;
 
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Properties;
-
-import javax.swing.JOptionPane;
 
 public class conexion {
     private Connection con = null;
@@ -13,15 +11,18 @@ public class conexion {
     public Connection getConexion() {
         try {
             Properties properties = new Properties();
-            FileInputStream fileInputStream = new FileInputStream("src/main/java/database/app.properties");
+            FileInputStream fileInputStream = new FileInputStream("demo/src/main/java/database/app.properties");
             properties.load(fileInputStream);
             con = (Connection)DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("user"), properties.getProperty("password")); 
-            JOptionPane.showMessageDialog(null, "conectado");
+            System.out.println("Conexión exitosa");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al conectar");
+            System.out.println("Error de conexión");
             e.printStackTrace();
         }
         return con;
+    }
+
+    public void conectar() {
     }
     
 }
