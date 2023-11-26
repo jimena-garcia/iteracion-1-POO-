@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-public class mainController implements ActionListener{
+public class mainController implements ActionListener {
 
     private final producto producto;
     private final consultasProducto consultasProducto;
@@ -28,55 +28,74 @@ public class mainController implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == view.jButtonEliminar) {
             eliminar();
-        } else if (e.getSource() == view.jButtonModificar) {
+        }
+        if (e.getSource() == view.jButtonModificar) {
             modificar();
-        } else if (e.getSource() == view.jButtonRegistrar) {
+        }
+        if (e.getSource() == view.jButtonRegistrar) {
             registrar(producto);
-        } else if (e.getSource() == view.jButtonBuscar) {
+        }
+        if (e.getSource() == view.jButtonBuscar) {
             buscar();
         }
     }
 
     public void eliminar() {
-        int id = Integer.parseInt(view.jTextID.getText());
-        if (consultasProducto.eliminar(id)) {
-            JOptionPane.showMessageDialog(null, "Producto eliminado correctamente");
-        } else {
-            JOptionPane.showMessageDialog(null, "Error al eliminar producto");
+        try {
+            int id = Integer.parseInt(view.jTextID.getText());
+            if (consultasProducto.eliminar(id)) {
+                JOptionPane.showMessageDialog(null, "Producto eliminado correctamente");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al eliminar producto");
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID no válido");
         }
     }
 
     public void registrar(producto producto) {
-        obtenerProductoVista();
-        if (consultasProducto.registrar(producto)) {
-            JOptionPane.showMessageDialog(null, "Producto registrado correctamente");
-        } else {
-            JOptionPane.showMessageDialog(null, "Error al registrar producto");
+        try {
+            obtenerProductoVista();
+            if (consultasProducto.registrar(producto)) {
+                JOptionPane.showMessageDialog(null, "Producto registrado correctamente");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al registrar producto");
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Precio no válido");
         }
     }
 
     public void modificar() {
-        obtenerProductoVista();
-        if (consultasProducto.modificar(producto)) {
-            JOptionPane.showMessageDialog(null, "Producto modificado correctamente");
-            limpiarVista();
-        } else {
-            JOptionPane.showMessageDialog(null, "Error al modificar producto");
+        try {
+            obtenerProductoVista();
+            if (consultasProducto.modificar(producto)) {
+                JOptionPane.showMessageDialog(null, "Producto modificado correctamente");
+                limpiarVista();
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al modificar producto");
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Precio no válido");
         }
     }
 
     public void buscar() {
-        producto.setId(Integer.parseInt(view.jTextID.getText()));
-        if (consultasProducto.buscar(producto)) {
-            ocuparProductoVista(); 
-        } else {
-            JOptionPane.showMessageDialog(null, "Error al buscar producto");
+        try {
+            producto.setId(Integer.parseInt(view.jTextID.getText()));
+            if (consultasProducto.buscar(producto)) {
+                ocuparProductoVista();
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al buscar producto");
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID no válido");
         }
     }
 
     private void obtenerProductoVista() {
         producto.setNombre(view.jTextNombre.getText());
-       producto.setDesc(view.jTextDescripcion.getText()); 
+        producto.setDesc(view.jTextDescripcion.getText());
         producto.setPrecio(Double.parseDouble(view.jTextPrecio.getText()));
     }
 
@@ -94,7 +113,4 @@ public class mainController implements ActionListener{
         view.jTextDescripcion.setText("");
         view.jTextPrecio.setText("");
     }
-     
-
-
 }
