@@ -47,11 +47,10 @@ public class consultasProducto {
     public boolean modificar(producto producto) {
 
         try (Connection con = conexion.getConexion();
-                PreparedStatement ps = con
-                        .prepareStatement("UPDATE Productos SET nombre = ?, desc = ?, precio = ? WHERE ID = ?")) {
+                PreparedStatement ps = con.prepareStatement("UPDATE Productos SET NOMBRE = ?, DESCRIPCION = ?, PRECIO = ? WHERE ID = ?")) {
             ps.setString(1, producto.getNombre());
             ps.setString(2, producto.getDesc());
-
+            ps.setDouble(3, producto.getPrecio());
             ps.setInt(4, producto.getId());
             return ps.executeUpdate() > 0;
         } catch (Exception e) {
