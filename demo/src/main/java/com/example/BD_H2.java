@@ -15,5 +15,7 @@ public class BD_H2 {
       mainController mainController = new mainController(producto, view, consultasProducto);
       view.setVisible(true);
 
+    
+
     }
 }

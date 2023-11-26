@@ -6,8 +6,12 @@ package view;
 
 import java.beans.Statement;
 import java.sql.ResultSet;
+import java.util.List;
+
+import javax.swing.table.DefaultTableModel;
 
 import database.conexion;
+import model.producto;
 
 /**
  *
@@ -21,6 +25,18 @@ public class view extends javax.swing.JFrame {
     public view() {
         initComponents();
     }
+    
+    public void actualizarTabla(List<producto> listaProductos) {
+        DefaultTableModel model = (DefaultTableModel) BaseDatos.getModel();
+        model.setRowCount(0); // Limpiar la tabla antes de actualizarla
+    
+        for (producto prod : listaProductos) {
+            Object[] rowData = {prod.getId(), prod.getNombre(), prod.getDesc(), prod.getPrecio()};
+            model.addRow(rowData);
+        }
+    }
+
+  
 
     
     @SuppressWarnings("unchecked")

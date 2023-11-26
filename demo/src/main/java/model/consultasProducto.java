@@ -14,6 +14,30 @@ public class consultasProducto {
     public consultasProducto() {
         conexion = new conexion();
     }
+    
+    public List<producto> obtenerTodosLosProductos() {
+        List<producto> listaProductos = new ArrayList<>();
+    
+        try (Connection con = conexion.getConexion();
+             PreparedStatement ps = con.prepareStatement("SELECT * FROM Productos");
+             ResultSet rs = ps.executeQuery()) {
+    
+            while (rs.next()) {
+                producto prod = new producto();
+                prod.setId(rs.getInt("id"));
+                prod.setNombre(rs.getString("nombre"));
+                prod.setDesc(rs.getString("desc"));
+                prod.setPrecio(rs.getDouble("precio"));
+    
+                listaProductos.add(prod);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    
+        return listaProductos;
+    }
+    
 
     public boolean eliminar(int id) {
         try (Connection con = conexion.getConexion();
@@ -78,29 +102,5 @@ public class consultasProducto {
         return false;
     }
 
-    public List<producto> listar() {
-        
-        List<producto> productos = new ArrayList<>();
-        
-        try (Connection con = conexion.getConexion();
-                PreparedStatement ps = con.prepareStatement("SELECT * FROM Productos")) {
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                producto producto = new producto();
-                producto.setId(rs.getInt("id"));
-                producto.setNombre(rs.getString("nombre"));
-                producto.setDesc(rs.getString("desc"));
-                try {
-                    producto.setPrecio(rs.getDouble("precio"));
-                } catch (SQLException e) {
-                    System.out.println(e);
-                }
-                productos.add(producto);
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return productos;
-    }
-        
+    
 }

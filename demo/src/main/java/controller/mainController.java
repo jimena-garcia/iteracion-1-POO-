@@ -6,7 +6,7 @@ import view.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
+
 
 import javax.swing.JOptionPane;
 
@@ -41,23 +41,6 @@ public class mainController implements ActionListener {
         }
     }
 
-    public static void imprimirTabla(String header1, String header2, String header3, List<producto> lista1, List<producto> lista2, List<producto> lista3) {
-        System.out.printf("%-30s %-30s %-30s\n", header1, header2, header3);
-        System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
-
-        int maxSize = Math.max(Math.max(lista1.size(), lista2.size()), lista3.size());
-
-        for (int i = 0; i < maxSize; i++) {
-            String nombre = i < lista1.size() ? lista1.get(i).getNombre() : "";
-            String descripcion = i < lista2.size() ? lista2.get(i).getDesc() : "";
-            Double precio = i < lista3.size() ? lista3.get(i).getPrecio() : 0.0;
-
-            System.out.printf("%-30s %-30s %-30s\n", nombre, descripcion, precio);
-        }
-    }
-
-
-
     public void eliminar() {
         try {
             int id = Integer.parseInt(view.jTextID.getText());
@@ -76,14 +59,14 @@ public class mainController implements ActionListener {
             obtenerProductoVista();
             if (consultasProducto.registrar(producto)) {
                 JOptionPane.showMessageDialog(null, "Producto registrado correctamente");
-            } else {
+                view.actualizarTabla(consultasProducto.obtenerTodosLosProductos());
                 JOptionPane.showMessageDialog(null, "Error al registrar producto");
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Precio no válido");
         }
     }
-
+    
     public void modificar() {
         try {
             obtenerProductoVista();
